@@ -3,8 +3,8 @@
 // EMPLOYEE MANAGEMENT SYSTEM
 // ============================================
 
-const API_URL = "http://localhost:5000/api/employees";
-const ATTENDANCE_API = "http://localhost:5000/api/attendance";
+const API_URL = "https://employee-management-system-hqfm.onrender.com/api/employees";
+const ATTENDANCE_API = "https://employee-management-system-hqfm.onrender.com/api/attendance";
 
 let currentPage = 1;
 let totalPages = 1;
