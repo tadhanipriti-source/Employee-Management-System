@@ -49,7 +49,7 @@ function getPhotoURL(photo) {
         return photo;
     }
 
-    return "http://localhost:5000" + photo;
+    return "https://employee-management-system-hqfm.onrender.com" + photo;
 }
 
 
