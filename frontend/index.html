@@ -1,0 +1,681 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-users"></i>
+            <span>EMS</span>
+        </div>
+
+        <nav>
+            <a href="#dashboard" class="nav-link active">
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+            </a>
+
+            <a href="#employees" class="nav-link">
+                <i class="fa-solid fa-users"></i>
+                Employees
+            </a>
+
+            <a href="#attendance" class="nav-link">
+                <i class="fa-solid fa-calendar-check"></i>
+                Attendance
+            </a>
+        </nav>
+
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="top-header">
+
+            <div>
+                <h1>Employee Management System</h1>
+                <p>Manage your employees easily</p>
+            </div>
+
+            <div class="admin-info">
+                <i class="fa-solid fa-circle-user"></i>
+                <span>Admin</span>
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             DASHBOARD SECTION
+        ========================== -->
+
+        <section id="dashboard">
+
+            <div class="section-heading">
+                <h2>Dashboard Overview</h2>
+            </div>
+
+            <!-- Dashboard Cards -->
+            <div class="dashboard-cards">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <div>
+                        <p>Total Employees</p>
+                        <h2 id="totalEmployees">0</h2>
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+
+                    <div>
+                        <p>Total Departments</p>
+                        <h2 id="totalDepartments">0</h2>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Department and Salary Statistics -->
+            <div class="dashboard-grid">
+
+                <div class="panel">
+
+                    <div class="panel-heading">
+                        <h3>
+                            <i class="fa-solid fa-chart-pie"></i>
+                            Department Statistics
+                        </h3>
+                    </div>
+
+                    <div id="departmentStats" class="department-stats">
+                        Loading department statistics...
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-heading">
+                        <h3>
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                            Salary Statistics
+                        </h3>
+                    </div>
+
+                    <div class="salary-stats">
+
+                        <div class="salary-item">
+                            <p>Total Salary</p>
+                            <h2 id="totalSalary">₹0</h2>
+                        </div>
+
+                        <div class="salary-item">
+                            <p>Average Salary</p>
+                            <h2 id="averageSalary">₹0</h2>
+                        </div>
+
+                        <div class="salary-item">
+                            <p>Highest Salary</p>
+                            <h2 id="highestSalary">₹0</h2>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Recent Employees -->
+            <div class="panel recent-panel">
+
+                <div class="panel-heading">
+                    <h3>
+                        <i class="fa-solid fa-clock"></i>
+                        Recent Employees
+                    </h3>
+                </div>
+
+                <div id="recentEmployees" class="recent-employees">
+                    Loading recent employees...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             EMPLOYEE MANAGEMENT
+        ========================== -->
+
+        <section id="employees" class="employee-section">
+
+            <div class="employee-heading">
+
+                <div>
+                    <h2>Employee Management</h2>
+                    <p>View and manage all employees</p>
+                </div>
+
+                <button class="primary-btn" onclick="openEmployeeForm()">
+                    <i class="fa-solid fa-plus"></i>
+                    Add Employee
+                </button>
+
+            </div>
+
+
+            <!-- Add Employee Form -->
+            <div id="addEmployeeSection" class="form-panel hidden">
+
+                <div class="form-heading">
+
+                    <h3>Add New Employee</h3>
+
+                    <button type="button" class="close-btn"
+                        onclick="closeEmployeeForm()">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                </div>
+
+
+                <form id="employeeForm" enctype="multipart/form-data">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Employee ID *</label>
+                            <input type="text" name="employeeId"
+                                placeholder="EMP001" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" name="fullName"
+                                placeholder="Enter full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" name="email"
+                                placeholder="Enter email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone *</label>
+                            <input type="tel" name="phone"
+                                placeholder="Enter phone number" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gender *</label>
+                            <select name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Department *</label>
+                            <select name="department" required>
+                                <option value="">Select Department</option>
+                                <option value="IT">IT</option>
+                                <option value="HR">HR</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Sales">Sales</option>
+                                <option value="Operations">Operations</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Designation *</label>
+                            <input type="text" name="designation"
+                                placeholder="Enter designation" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Salary *</label>
+                            <input type="number" name="salary"
+                                placeholder="Enter salary" min="0" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Joining Date *</label>
+                            <input type="date" name="joiningDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Profile Photo</label>
+                            <input type="file" name="profilePhoto"
+                                accept="image/*">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Address *</label>
+                            <textarea name="address"
+                                placeholder="Enter address"
+                                rows="3" required></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button type="submit" class="primary-btn">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Save Employee
+                        </button>
+
+                        <button type="button" class="secondary-btn"
+                            onclick="closeEmployeeForm()">
+                            Cancel
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- Search and Export -->
+            <div class="table-toolbar">
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input type="text" id="searchInput"
+                        placeholder="Search employees...">
+                </div>
+
+                <button type="button" id="exportBtn" class="export-btn">
+                    <i class="fa-solid fa-file-csv"></i>
+                    Export CSV
+                </button>
+
+            </div>
+
+
+            <!-- Employee Table -->
+            <div class="table-container">
+
+                <table class="employee-table">
+
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Employee ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>Salary</th>
+                            <th>Joining Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="employeeTableBody">
+
+                        <tr>
+                            <td colspan="9" class="loading-text">
+                                Loading employees...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- Pagination -->
+            <div class="pagination">
+
+                <button id="prevBtn" class="page-btn">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    Previous
+                </button>
+
+                <span id="pageInfo">Page 1</span>
+
+                <button id="nextBtn" class="page-btn">
+                    Next
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ATTENDANCE MANAGEMENT
+        ========================== -->
+
+        <section id="attendance" class="employee-section">
+
+            <div class="employee-heading">
+
+                <div>
+                    <h2>Attendance Management</h2>
+                    <p>Mark and manage employee attendance</p>
+                </div>
+
+            </div>
+
+
+            <!-- Mark Attendance Form -->
+            <div class="form-panel">
+
+                <div class="form-heading">
+                    <h3>
+                        <i class="fa-solid fa-calendar-plus"></i>
+                        Mark Employee Attendance
+                    </h3>
+                </div>
+
+
+                <form id="attendanceForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>Select Employee *</label>
+
+                            <select id="attendanceEmployee"
+                                name="employee" required>
+
+                                <option value="">
+                                    Select Employee
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Attendance Date *</label>
+
+                            <input type="date"
+                                id="attendanceDate"
+                                name="date"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Attendance Status *</label>
+
+                            <select id="attendanceStatus"
+                                name="status" required>
+
+                                <option value="">
+                                    Select Status
+                                </option>
+
+                                <option value="Present">
+                                    Present
+                                </option>
+
+                                <option value="Absent">
+                                    Absent
+                                </option>
+
+                                <option value="Half Day">
+                                    Half Day
+                                </option>
+
+                                <option value="Leave">
+                                    Leave
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button type="submit" class="primary-btn">
+                            <i class="fa-solid fa-check"></i>
+                            Mark Attendance
+                        </button>
+
+                        <button type="reset" class="secondary-btn">
+                            Clear
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- Attendance Records -->
+            <div class="panel attendance-record-panel">
+
+                <div class="panel-heading">
+                    <h3>
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        Attendance Records
+                    </h3>
+                </div>
+
+
+                <div class="table-container">
+
+                    <table class="employee-table attendance-table">
+
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Employee Name</th>
+                                <th>Department</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody id="attendanceTableBody">
+
+                            <tr>
+                                <td colspan="5" class="loading-text">
+                                    Loading attendance records...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         EDIT EMPLOYEE MODAL
+    ========================== -->
+
+    <div id="editModal" class="modal">
+
+        <div class="modal-content">
+
+            <div class="modal-heading">
+
+                <h2>Edit Employee</h2>
+
+                <button type="button" class="close-btn"
+                    onclick="closeEditModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <form id="editEmployeeForm" enctype="multipart/form-data">
+
+                <input type="hidden" id="editEmployeeId">
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Employee ID</label>
+                        <input type="text" id="editEmployeeCode"
+                            name="employeeId" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="editFullName"
+                            name="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="editEmail"
+                            name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" id="editPhone"
+                            name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="editGender" name="gender" required>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Department</label>
+                        <select id="editDepartment"
+                            name="department" required>
+                            <option value="IT">IT</option>
+                            <option value="HR">HR</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Operations">Operations</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Designation</label>
+                        <input type="text" id="editDesignation"
+                            name="designation" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Salary</label>
+                        <input type="number" id="editSalary"
+                            name="salary" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Joining Date</label>
+                        <input type="date" id="editJoiningDate"
+                            name="joiningDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Profile Photo</label>
+                        <input type="file" id="editProfilePhoto"
+                            name="profilePhoto" accept="image/*">
+                    </div>
+
+                    <div class="form-group photo-preview-group">
+                        <label>Current Photo</label>
+                        <img id="editPhotoPreview"
+                            src="" alt="Employee Photo">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Address</label>
+                        <textarea id="editAddress"
+                            name="address" rows="3" required></textarea>
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button type="submit" class="primary-btn">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Update Employee
+                    </button>
+
+                    <button type="button" class="secondary-btn"
+                        onclick="closeEditModal()">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
